@@ -82,8 +82,7 @@ export default function Home() {
       <div className="ambient ambient-two" />
       <main className="mx-auto w-full max-w-[1220px] px-5 py-6 sm:px-8 lg:px-10 lg:py-10">
         <nav className="mb-10 flex items-center justify-between text-sm">
-          <a className="brand-mark" href="#top"><span>nn</span> / portfolio</a>
-          <span className="status-pill"><span className="pulse-dot" /> Software Developer</span>
+          <h1 className="hero-title"><em>Software Developer</em></h1>
           <a className="nav-link" href="mailto:Laxinkulul3ko@gmail.com">Let&apos;s connect <ArrowUpRight size={15} /></a>
         </nav>
 
