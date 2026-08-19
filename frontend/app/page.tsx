@@ -102,7 +102,7 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-3">
                 <a className="primary-button" href="mailto:Laxinkulul3ko@gmail.com"><Mail size={16} /> Email me <ArrowUpRight size={15} /></a>
                 <a className="icon-button" href="tel:0678062924" aria-label="Call Nkululeko"><Phone size={17} /></a>
-                <a className="icon-button" href="#resume" aria-label="Download resume"><Download size={17} /></a>
+                <a className="icon-button" href="/updated_cv.pdf" download="Nkululeko-Ndlwana-CV.pdf" aria-label="Download resume"><Download size={17} /></a>
               </div>
             </div>
           </section>
