@@ -23,26 +23,27 @@ import { useEffect, useState } from "react";
 type TechItem = {
   name: string;
   logo: React.ReactNode;
+  href: string;
 };
 
 const languages: TechItem[] = [
-  { name: "Java", logo: <JavaLogo /> },
-  { name: "TypeScript", logo: <TypeScriptLogo /> },
-  { name: "HTML", logo: <HtmlLogo /> },
-  { name: "CSS", logo: <CssLogo /> },
-  { name: "JavaScript", logo: <JavaScriptLogo /> },
+  { name: "Java", logo: <JavaLogo />, href: "https://www.java.com/" },
+  { name: "TypeScript", logo: <TypeScriptLogo />, href: "https://www.typescriptlang.org/" },
+  { name: "HTML", logo: <HtmlLogo />, href: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+  { name: "CSS", logo: <CssLogo />, href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { name: "JavaScript", logo: <JavaScriptLogo />, href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
 ];
 
 const frameworks: TechItem[] = [
-  { name: "Node.js", logo: <NodeLogo /> },
-  { name: "Spring Boot", logo: <SpringLogo /> },
-  { name: "Next.js", logo: <NextLogo /> },
+  { name: "Node.js", logo: <NodeLogo />, href: "https://nodejs.org/" },
+  { name: "Spring Boot", logo: <SpringLogo />, href: "https://spring.io/projects/spring-boot" },
+  { name: "Next.js", logo: <NextLogo />, href: "https://nextjs.org/" },
 ];
 
 const tools: TechItem[] = [
-  { name: "Git", logo: <GitLogo /> },
-  { name: "VS Code", logo: <VsCodeLogo /> },
-  { name: "Apache NetBeans", logo: <NetBeansLogo /> },
+  { name: "Git", logo: <GitLogo />, href: "https://git-scm.com/" },
+  { name: "VS Code", logo: <VsCodeLogo />, href: "https://code.visualstudio.com/" },
+  { name: "Apache NetBeans", logo: <NetBeansLogo />, href: "https://netbeans.apache.org/" },
 ];
 
 const heroImages = [
@@ -90,10 +91,10 @@ function TagGroup({ label, items }: { label: string; items: TechItem[] }) {
       <p className="eyebrow mb-3">{label}</p>
       <div className="flex flex-wrap gap-2">
         {items.map((item) => (
-          <span className="skill-tag" key={item.name}>
+          <a className="skill-tag" href={item.href} key={item.name} target="_blank" rel="noreferrer noopener" aria-label={`Visit the official ${item.name} website`}>
             <span className="skill-logo" aria-hidden="true">{item.logo}</span>
             {item.name}
-          </span>
+          </a>
         ))}
       </div>
     </div>
@@ -254,8 +255,8 @@ export default function Home() {
           <section className="bento-card education-card">
             <SectionLabel icon={GraduationCap}>05 / Education</SectionLabel>
             <div className="timeline">
-              <div className="timeline-item"><span className="timeline-dot active" /><div><p className="timeline-date">2021—2026</p><h3>Tshwane University<br />of Technology</h3><p>Diploma in Computer Science · NQF 6</p></div></div>
-              <div className="timeline-item"><span className="timeline-dot" /><div><p className="timeline-date">2017—2021</p><h3>Springs Boys<br />High School</h3><p>National Senior Certificate</p></div></div>
+              <div className="timeline-item"><span className="timeline-dot active" /><div><p className="timeline-date">2021—2026</p><h3><a href="https://www.tut.ac.za/" target="_blank" rel="noreferrer noopener">Tshwane University<br />of Technology</a></h3><p>Diploma in Computer Science · NQF 6</p></div></div>
+              <div className="timeline-item"><span className="timeline-dot" /><div><p className="timeline-date">2017—2021</p><h3><a href="https://www.sbhs.co.za/" target="_blank" rel="noreferrer noopener">Springs Boys<br />High School</a></h3><p>National Senior Certificate</p></div></div>
             </div>
           </section>
 
