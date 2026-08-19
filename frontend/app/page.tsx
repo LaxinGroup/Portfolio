@@ -95,9 +95,9 @@ export default function Home() {
                 <div className="avatar"><Image src="/IMG_20260121_165048.jpg" alt="Nkululeko Njabulo Ndlwana" fill sizes="70px" priority /><span className="avatar-dot" /></div>
               </div>
               <div>
-                <p className="eyebrow mb-4">Computer Science / 2021—26</p>
+                <p className="eyebrow mb-4">Mr</p>
                 <h1 className="hero-title">Nkululeko<br /><em>Njabulo</em> Ndlwana</h1>
-                <p className="hero-subtitle">Computer Science Student <span>/</span> Developer</p>
+                <p className="hero-subtitle">Full Stack Developer</p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <a className="primary-button" href="mailto:Laxinkulul3ko@gmail.com"><Mail size={16} /> Email me <ArrowUpRight size={15} /></a>
@@ -109,7 +109,7 @@ export default function Home() {
 
           <section className="bento-card objective-card">
             <SectionLabel icon={Sparkles}>01 / Objective</SectionLabel>
-            <p className="objective-copy">Motivated and hardworking student with a passion for building useful digital experiences. Seeking an opportunity as a <strong>Software Developer</strong> to apply theoretical knowledge in a professional environment and grow through meaningful, hands-on work.</p>
+            <p className="objective-copy">Motivated and hardworking student with a passion for building useful digital experiences. Seeking an opportunity as a <strong>Software Developer</strong> to apply practical knowledge in a professional environment and grow through meaningful, hands-on work.</p>
             <div className="card-footer"><MapPin size={15} /> Springs, Johannesburg, South Africa</div>
           </section>
 
