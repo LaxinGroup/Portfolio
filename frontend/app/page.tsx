@@ -83,6 +83,7 @@ export default function Home() {
       <main className="mx-auto w-full max-w-[1220px] px-5 py-6 sm:px-8 lg:px-10 lg:py-10">
         <nav className="mb-10 flex items-center justify-between text-sm">
           <a className="brand-mark" href="#top"><span>nn</span> / portfolio</a>
+          <span className="status-pill"><span className="pulse-dot" /> Software Developer</span>
           <a className="nav-link" href="mailto:Laxinkulul3ko@gmail.com">Let&apos;s connect <ArrowUpRight size={15} /></a>
         </nav>
 
@@ -93,7 +94,6 @@ export default function Home() {
             <div className="relative z-10 flex h-full flex-col justify-between gap-12">
               <div className="flex items-start justify-between">
                 <div className="avatar"><Image src="/IMG_20260121_165048.jpg" alt="Nkululeko Njabulo Ndlwana" fill sizes="70px" priority /><span className="avatar-dot" /></div>
-                <span className="status-pill"><span className="pulse-dot" /> Software Developer</span>
               </div>
               <div>
                 <p className="eyebrow mb-4">Computer Science / 2021—26</p>
