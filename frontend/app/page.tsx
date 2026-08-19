@@ -1,3 +1,5 @@
+"use client";
+
 import {
   ArrowUpRight,
   BriefcaseBusiness,
@@ -16,10 +18,40 @@ import {
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const languages = ["Java", "HTML", "CSS", "JavaScript"];
 const frameworks = ["Node.js", "Spring Boot", "Next.js"];
 const tools = ["Git", "VS Code", "Apache NetBeans"];
+const heroImages = [
+  "/0x1900-000000-80-0-0.jpg",
+  "/11441be1-343f-4f01-ab27-879ae19dbf00.webp",
+  "/images.jpg",
+];
+
+function HeroPhoto() {
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    const rotation = window.setInterval(() => {
+      setActiveImage((currentImage) => (currentImage + 1) % heroImages.length);
+    }, 5000);
+
+    return () => window.clearInterval(rotation);
+  }, []);
+
+  return (
+    <div className="hero-photo-stack" aria-hidden="true">
+      {heroImages.map((image, index) => (
+        <div
+          className={`hero-photo ${index === activeImage ? "hero-photo-active" : ""}`}
+          key={image}
+          style={{ backgroundImage: `url("${image}")` }}
+        />
+      ))}
+    </div>
+  );
+}
 
 function SectionLabel({ icon: Icon, children }: { icon: typeof Code2; children: React.ReactNode }) {
   return (
@@ -56,7 +88,7 @@ export default function Home() {
 
         <div id="top" className="bento-grid">
           <section className="bento-card hero-card">
-            <div className="hero-photo" />
+            <HeroPhoto />
             <div className="hero-clouds" />
             <div className="relative z-10 flex h-full flex-col justify-between gap-12">
               <div className="flex items-start justify-between">
