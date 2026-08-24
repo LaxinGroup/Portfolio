@@ -217,7 +217,7 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-3">
                 <a className="primary-button" href="mailto:Laxinkulul3ko@gmail.com"><Mail size={16} /> Email me <ArrowUpRight size={15} /></a>
                 <a className="icon-button" href="tel:0678062924" aria-label="Call Nkululeko"><Phone size={17} /></a>
-                <a className="icon-button" href="/updated_cv.pdf" download="Nkululeko-Ndlwana-CV.pdf" aria-label="Download resume"><Download size={17} /></a>
+                <a className="icon-button" href="/nkululeko_ndlwana.pdf" download="Nkululeko-Ndlwana-CV.pdf" aria-label="Download resume"><Download size={17} /></a>
               </div>
             </div>
           </section>
@@ -255,8 +255,24 @@ export default function Home() {
           <section className="bento-card education-card">
             <SectionLabel icon={GraduationCap}>05 / Education</SectionLabel>
             <div className="timeline">
-              <div className="timeline-item"><span className="timeline-dot active" /><div><p className="timeline-date">2021—2026</p><h3><a href="https://www.tut.ac.za/" target="_blank" rel="noreferrer noopener">Tshwane University<br />of Technology</a></h3><p>Diploma in Computer Science · NQF 6</p></div></div>
-              <div className="timeline-item"><span className="timeline-dot" /><div><p className="timeline-date">2017—2021</p><h3><a href="https://www.sbhs.co.za/" target="_blank" rel="noreferrer noopener">Springs Boys<br />High School</a></h3><p>National Senior Certificate</p></div></div>
+              <div className="timeline-item">
+                <span className="timeline-dot active" />
+                <div>
+                  <div className="timeline-photo"><Image src="/tut.jpg" alt="Tshwane University of Technology" width={400} height={260} /></div>
+                  <p className="timeline-date">2021—2026</p>
+                  <h3><a href="https://www.tut.ac.za/" target="_blank" rel="noreferrer noopener">Tshwane University<br />of Technology</a></h3>
+                  <p>Diploma in Computer Science · NQF 6</p>
+                </div>
+              </div>
+              <div className="timeline-item">
+                <span className="timeline-dot" />
+                <div>
+                  <div className="timeline-photo"><Image src="/springsbhs.jpg" alt="Springs Boys High School" width={400} height={260} /></div>
+                  <p className="timeline-date">2017—2021</p>
+                  <h3><a href="https://www.sbhs.co.za/" target="_blank" rel="noreferrer noopener">Springs Boys<br />High School</a></h3>
+                  <p>National Senior Certificate</p>
+                </div>
+              </div>
             </div>
           </section>
 
