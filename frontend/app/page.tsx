@@ -1,30 +1,55 @@
-"use client";
-
 import {
-  ArrowUpRight,
-  BriefcaseBusiness,
-  Check,
-  Code2,
-  Download,
-  ExternalLink,
-  GitBranch,
-  GraduationCap,
-  Mail,
-  MapPin,
-  Phone,
-  Radio,
-  Server,
-  Sparkles,
-  Wrench,
-} from "lucide-react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+  ArrowUpRightIcon,
+  BriefcaseIcon,
+  BroadcastIcon,
+  BusIcon,
+  CheckIcon,
+  CodeIcon,
+  DownloadSimpleIcon,
+  EnvelopeSimpleIcon,
+  GitBranchIcon,
+  GithubLogoIcon,
+  GraduationCapIcon,
+  HardDrivesIcon,
+  MapPinIcon,
+  PhoneIcon,
+  SparkleIcon,
+  UsersThreeIcon,
 
-type TechItem = {
-  name: string;
-  logo: React.ReactNode;
-  href: string;
-};
+} from "@phosphor-icons/react/ssr";
+import type { Icon } from "@phosphor-icons/react";
+import Image from "next/image";
+import { HeroPhoto } from "./components/hero-photo";
+import { IslandNav } from "./components/island-nav";
+import { Reveal } from "./components/reveal";
+import {
+  CssLogo,
+  GitLogo,
+  HtmlLogo,
+  JavaLogo,
+  JavaScriptLogo,
+  NetBeansLogo,
+  NextLogo,
+  ExpoLogo,
+  NodeLogo,
+  PlSqlLogo,
+  ReactNativeLogo,
+  SpringLogo,
+  SqlLogo,
+  TypeScriptLogo,
+  VsCodeLogo,
+} from "./components/tech-logos";
+
+/* ─── Content ───────────────────────────────────────────── */
+
+const EMAIL = "Laxinkulul3ko@gmail.com";
+const PHONE_HREF = "tel:0678062924";
+const PHONE_LABEL = "067 806 2924";
+const CV_HREF = "/latest_cv.pdf";
+const GITHUB_HREF = "https://github.com/LaxinGroup";
+const GITHUB_LABEL = "github.com/LaxinGroup";
+
+type TechItem = { name: string; logo: React.ReactNode; href: string };
 
 const languages: TechItem[] = [
   { name: "Java", logo: <JavaLogo />, href: "https://www.java.com/" },
@@ -38,6 +63,13 @@ const frameworks: TechItem[] = [
   { name: "Node.js", logo: <NodeLogo />, href: "https://nodejs.org/" },
   { name: "Spring Boot", logo: <SpringLogo />, href: "https://spring.io/projects/spring-boot" },
   { name: "Next.js", logo: <NextLogo />, href: "https://nextjs.org/" },
+  { name: "React Native", logo: <ReactNativeLogo />, href: "https://reactnative.dev/" },
+  { name: "Expo", logo: <ExpoLogo />, href: "https://expo.dev/" },
+];
+
+const databases: TechItem[] = [
+  { name: "SQL", logo: <SqlLogo />, href: "https://docs.oracle.com/en/database/oracle/oracle-database/" },
+  { name: "PL/SQL", logo: <PlSqlLogo />, href: "https://www.oracle.com/database/technologies/appdev/plsql.html" },
 ];
 
 const tools: TechItem[] = [
@@ -46,53 +78,122 @@ const tools: TechItem[] = [
   { name: "Apache NetBeans", logo: <NetBeansLogo />, href: "https://netbeans.apache.org/" },
 ];
 
-const heroImages = [
-  "/0x1900-000000-80-0-0.jpg",
-  "/11441be1-343f-4f01-ab27-879ae19dbf00.webp",
-  "/images.jpg",
+const repos = [
+  { label: "Frontend repo", href: "https://github.com/Gorillmac/smartbus-front-end" },
+  { label: "Backend repo", href: "https://github.com/Gorillmac/smartbus-backend" },
 ];
 
-function HeroPhoto() {
-  const [activeImage, setActiveImage] = useState(0);
+const education = [
+  {
+    image: "/tut.jpg",
+    alt: "Tshwane University of Technology",
+    date: "2022—2026",
+    name: ["Tshwane University", "of Technology"],
+    href: "https://www.tut.ac.za/",
+    detail: "Diploma in Computer Science · NQF 6",
+    active: true,
+  },
+  {
+    image: "/springsbhs.jpg",
+    alt: "Springs Boys High School",
+    date: "2017—2021",
+    name: ["Springs Boys", "High School"],
+    href: "https://www.sbhs.co.za/",
+    detail: "National Senior Certificate",
+    active: false,
+  },
+];
 
-  useEffect(() => {
-    const rotation = window.setInterval(() => {
-      setActiveImage((currentImage) => (currentImage + 1) % heroImages.length);
-    }, 5000);
+const references = [
+  { initials: "VM", name: "Vuyisile Memani", role: "Lecturer · TUT", email: "MemaniV@tut.ac.za" },
+  { initials: "ML", name: "Marlo Liebenberg", role: "Lecturer · TUT", email: "liebenbergm@tut.ac.za" },
+  { initials: "NRM", name: "Ndivho Revaldo Mphaphuli", role: "Programme Coordinator · 4IR Research Lab", email: "ndivhorevaldo@gmail.com" },
+];
 
-    return () => window.clearInterval(rotation);
-  }, []);
+const experience = [
+  {
+    org: "4IR Research Lab",
+    role: "Full Stack Web Developer",
+    date: "28 June 2026 — Present",
+    points: [
+      "Worked on secure, database-driven and scalable web applications using latest technologies and tools in web development including deployment and testing, assigned by the lab mentor",
+      "Developed secure, API-driven and scalable cross-platform mobile applications using modern Expo and React Native tooling, including EAS build/deployment and testing on iOS and Android, as assigned by the lab mentor.",
+    ],
+  },
+];
 
+/* ─── Primitives ────────────────────────────────────────── */
+
+/** Double-bezel: aluminium tray (outer shell) holding a glass plate (inner core). */
+function Bezel({ children, className = "", innerClassName = "" }: { children: React.ReactNode; className?: string; innerClassName?: string }) {
   return (
-    <div className="hero-photo-stack" aria-hidden="true">
-      {heroImages.map((image, index) => (
-        <div
-          className={`hero-photo ${index === activeImage ? "hero-photo-active" : ""}`}
-          key={image}
-          style={{ backgroundImage: `url("${image}")` }}
-        />
-      ))}
+    <div className={`h-full rounded-[2rem] bg-white/[0.03] p-1.5 ring-1 ring-white/[0.07] ${className}`}>
+      <div
+        className={`relative h-full overflow-hidden rounded-[calc(2rem-0.375rem)] bg-[#0a0b0d] shadow-[inset_0_1px_1px_rgba(255,255,255,0.09),0_30px_60px_-30px_rgba(0,0,0,0.7)] ${innerClassName}`}
+      >
+        {children}
+      </div>
     </div>
   );
 }
 
-function SectionLabel({ icon: Icon, children }: { icon: typeof Code2; children: React.ReactNode }) {
+function Eyebrow({ icon: IconCmp, children }: { icon?: Icon; children: React.ReactNode }) {
   return (
-    <div className="section-label">
-      <Icon size={15} strokeWidth={2.2} />
-      <span>{children}</span>
-    </div>
+    <span className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-muted ring-1 ring-white/10">
+      {IconCmp && <IconCmp size={12} weight="light" className="text-ice" />}
+      {children}
+    </span>
+  );
+}
+
+function PrimaryButton({ href, children, download }: { href: string; children: React.ReactNode; download?: string }) {
+  return (
+    <a
+      href={href}
+      download={download}
+      className="group inline-flex items-center gap-3 rounded-full bg-foreground py-1.5 pl-6 pr-1.5 text-sm font-medium text-background transition-transform duration-500 ease-spring hover:scale-[1.02] active:scale-[0.98]"
+    >
+      {children}
+      <span className="grid h-9 w-9 place-items-center rounded-full bg-black/[0.08] transition-transform duration-500 ease-spring group-hover:-translate-y-[1px] group-hover:translate-x-1 group-hover:scale-105">
+        <ArrowUpRightIcon size={16} weight="light" />
+      </span>
+    </a>
+  );
+}
+
+function GhostButton({ href, icon: IconCmp, children, download, external }: { href: string; icon: Icon; children: React.ReactNode; download?: string; external?: boolean }) {
+  return (
+    <a
+      href={href}
+      download={download}
+      {...(external ? { target: "_blank", rel: "noreferrer noopener" } : {})}
+      className="group inline-flex items-center gap-3 rounded-full bg-white/[0.05] py-1.5 pl-5 pr-1.5 text-sm text-foreground ring-1 ring-white/10 transition-all duration-500 ease-spring hover:bg-white/[0.09] active:scale-[0.98]"
+    >
+      {children}
+      <span className="grid h-9 w-9 place-items-center rounded-full bg-white/10 transition-transform duration-500 ease-spring group-hover:-translate-y-[1px] group-hover:translate-x-1 group-hover:scale-105">
+        <IconCmp size={16} weight="light" />
+      </span>
+    </a>
   );
 }
 
 function TagGroup({ label, items }: { label: string; items: TechItem[] }) {
   return (
     <div>
-      <p className="eyebrow mb-3">{label}</p>
+      <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-faint">{label}</p>
       <div className="flex flex-wrap gap-2">
         {items.map((item) => (
-          <a className="skill-tag" href={item.href} key={item.name} target="_blank" rel="noreferrer noopener" aria-label={`Visit the official ${item.name} website`}>
-            <span className="skill-logo" aria-hidden="true">{item.logo}</span>
+          <a
+            key={item.name}
+            href={item.href}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={`Visit the official ${item.name} website`}
+            className="group inline-flex items-center gap-2 rounded-full bg-white/[0.04] py-1.5 pl-1.5 pr-3.5 text-[13px] text-foreground/85 ring-1 ring-white/[0.08] transition-all duration-500 ease-spring hover:bg-ice hover:text-background active:scale-[0.97]"
+          >
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-white/[0.06] text-ice transition-colors duration-500 ease-spring group-hover:bg-black/10 group-hover:text-background [&_svg]:h-3.5 [&_svg]:w-3.5">
+              {item.logo}
+            </span>
             {item.name}
           </a>
         ))}
@@ -101,213 +202,326 @@ function TagGroup({ label, items }: { label: string; items: TechItem[] }) {
   );
 }
 
-function JavaLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M6 17c0-3.3 2.4-5.4 6.2-5.4S18 13.7 18 17s-2.4 5-6.2 5S6 20.3 6 17Zm2.5-9.5c1.1-1.2 2.3-1.9 4.1-1.9 2.4 0 4.1 1.1 4.1 2.7 0 1.9-1.8 2.7-4.1 2.7-2.2 0-4.1-1.1-4.1-2.7Zm2.3 2.1c.9 0 1.6-.4 1.6-1.2 0-.7-.7-1.1-1.6-1.1-.9 0-1.6.4-1.6 1.1 0 .8.7 1.2 1.6 1.2Z" fill="currentColor" />
-      <path d="M8.4 12.4h7.1v1.4H8.4zM6 19.4h12v1.4H6z" fill="currentColor" opacity=".7" />
-    </svg>
-  );
-}
-
-function HtmlLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 3h16l-1.5 15.9L12 21l-6.5-2.1L4 3Zm3.2 4.3 1.1 10.5 4.7 1.4 4.7-1.4 1.1-10.5H7.2Zm7.4 2.2-1 4.4-.9 3.4h-2.1l-.9-3.4-1-4.4h6z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function CssLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 3h16l-1.5 15.8L12 21l-6.5-2.2L4 3Zm3 4.2h9.3l-.3 2.3-4.5 1.7H9.8l-.4 2.2 3.4 1.2 3.4-1.2.3-2.7H8.8L8 8.7h8.1L16.5 7H7.1z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function JavaScriptLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 3h18v18H3V3Zm4 4.7h10v1.7H10v7.8H8.6v-7.8H7zm7.6 0h2.8l-2.3 3.3 2.8 5.1h-2.5l-1.7-3.3-1.7 3.3H7.9l2.8-5.1-2.3-3.3h2.7l1.6 3.3 1.6-3.3Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function TypeScriptLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M3 3h18v18H3V3Zm3.5 4.2h10.9v2H13v8.7h-2.2V6.2H6.5v1Zm9.1 0h2.8l-1.5 3.1 1.7 4.6h-2.3l-1-3.1-1 3.1h-2.3l1.7-4.6-1.5-3.1h2.5l.9 2.7.9-2.7Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function NodeLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.5 4.8 6.9v10.2L12 21.5l7.2-4.4V6.9L12 2.5Zm0 2.3 5.3 3.2-5.3 3.1-5.3-3.1L12 4.8Zm-6 4.9 5 3v6.1l-5-3.1V9.7Zm12 0v6.1l-5 3.1v-6.1l5-3.1Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function SpringLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M18.7 10.8c-.5-3.1-3.1-5.4-6.8-5.4-2.4 0-4.4 1.1-5.6 2.8C4.4 9.8 3.8 12 4.3 14.3c.8 3.8 4 6.5 7.8 6.5 3.1 0 5.4-1.8 6.3-4.6.5-1.7.1-3.5-.7-5.4Zm-7.2 7.4c-2.3 0-4.5-1.5-5.1-3.7-.5-1.7.1-3.6 1.7-5.1.5-.4 1.3-.9 2.1-1.2-.5 1.2-.6 2.6-.2 3.9.8 2.9 3.6 4.7 6.4 4.1-.3.6-.8 1.1-1.6 1.6-.7.5-1.5.8-2.3.8Zm7.1-8.4c-1.4 1-3.3 1.2-5.2.7.2-.8.8-1.6 1.7-2.2 1.1-.8 2.6-1.2 4.1-1.1-.8 1.1-1.3 1.7-2.6 2.6Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function NextLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.8c5.1 0 9.2 4.1 9.2 9.2s-4.1 9.2-9.2 9.2S2.8 17.1 2.8 12 6.9 2.8 12 2.8Zm0 2.2-6.1 9.1c1.2-1.6 3.1-2.7 5.3-2.7h.8V5Zm4.9 2.1 1.8 2.7v8.1h-2.5V9.1l.7-1.1Zm-9.8 7.1v4.4h2.2v-1.9l2.3-2.5h-4.5Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function GitLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M11.8 2.5a2.8 2.8 0 0 0-2.8 2.8v1.6L8 7.3l-3 3v1.9l3-3v1.3a2.8 2.8 0 1 0 1.9 4.8l1.6 1.6a2.8 2.8 0 1 0 2.2-1.1 2.9 2.9 0 0 0-1.5-.7l-1.7-1.7c.5-.3 1-.7 1.5-1.3h1.3v1.3A2.8 2.8 0 1 0 17 13.5V9.9l-1.5-1.5V6.9a2.8 2.8 0 0 0-2.7-2.8Zm-1.9 5.1a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm0 8.6a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm7.1-9.7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function VsCodeLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17.9 2.7 9.5 9.2 6 6.6 3.7 7.7l4.7 4.2L3.7 16l2.3 1.1 3.5-2.6 8.4 6.5 2.4-1.1V3.8l-2.4-1.1Zm0 4.3v10l-6.4-5 6.4-5Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function NetBeansLogo() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2.5 20 7v10l-8 4.5L4 17V7l8-4.5Zm0 2.2L6.2 7.5l3.5 2 2.3-1.3L17.8 7.5 12 4.7Zm-5.5 4.4 4.8 2.7v6.1l-4.8-2.7V9.1Zm11 0v6.1L12 17.9v-6.1l5.5-2.7Z" fill="currentColor" />
-    </svg>
-  );
-}
+/* ─── Page ──────────────────────────────────────────────── */
 
 export default function Home() {
   return (
-    <div className="site-shell">
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
-      <main className="mx-auto w-full max-w-[1220px] px-5 py-6 sm:px-8 lg:px-10 lg:py-10">
-        <nav className="mb-10 flex items-center justify-between text-sm">
-          <h1 className="hero-title"><em>Software Developer</em></h1>
-          <a className="nav-link" href="mailto:Laxinkulul3ko@gmail.com">Let&apos;s connect <ArrowUpRight size={15} /></a>
-        </nav>
+    <div id="top" className="relative min-h-[100dvh] overflow-x-clip">
+      <div className="atmosphere" />
+      <div className="grain" />
+      <IslandNav />
 
-        <div id="top" className="bento-grid">
-          <section className="bento-card hero-card">
-            <HeroPhoto />
-            <div className="hero-clouds" />
-            <div className="relative z-10 flex h-full flex-col justify-between gap-12">
-              <div className="flex items-start justify-between">
-                <div className="avatar"><Image src="/IMG_20260121_165048.jpg" alt="Nkululeko Njabulo Ndlwana" fill sizes="70px" priority /><span className="avatar-dot" /></div>
+      <main className="relative z-10 mx-auto w-full max-w-[1280px] px-4 md:px-8">
+        {/* ── Hero + Objective ───────────────────────────── */}
+        <section className="grid grid-cols-1 gap-4 pt-28 pb-24 md:gap-5 md:pt-36 md:pb-32 lg:grid-cols-12">
+          <Reveal className="lg:col-span-8">
+            <Bezel innerClassName="min-h-[620px] md:min-h-[680px]">
+              <HeroPhoto />
+              <div className="relative z-10 flex h-full min-h-[inherit] flex-col justify-between gap-16 p-6 md:p-12">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="relative h-16 w-16 rounded-full p-1 ring-1 ring-white/15">
+                    <div className="relative h-full w-full overflow-hidden rounded-full">
+                      <Image
+                        src="/IMG_20260121_165048.jpg"
+                        alt="Nkululeko Njabulo Ndlwana"
+                        fill
+                        sizes="64px"
+                        preload
+                        className="object-cover object-[50%_37%]"
+                      />
+                    </div>
+                    <span className="absolute right-0.5 bottom-0.5 h-3 w-3 rounded-full bg-emerald ring-2 ring-[#0a0b0d]" />
+                  </div>
+                  <Eyebrow icon={CodeIcon}>Software Developer</Eyebrow>
+                </div>
+
+                <div>
+                  <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.3em] text-muted">Mr</p>
+                  <h1 className="text-[clamp(3rem,9vw,6.25rem)] font-medium leading-[0.88] tracking-[-0.055em] text-foreground">
+                    Nkululeko
+                    <br />
+                    <span className="font-serif font-normal italic tracking-[-0.02em] text-ice">Njabulo</span> Ndlwana
+                  </h1>
+                  <p className="mt-6 text-base text-muted md:text-lg">Full Stack Developer</p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <PrimaryButton href={`mailto:${EMAIL}`}>Email me</PrimaryButton>
+                  <GhostButton href={CV_HREF} download="Nkululeko-Ndlwana-CV.pdf" icon={DownloadSimpleIcon}>
+                    Download CV
+                  </GhostButton>
+                  <a
+                    href={PHONE_HREF}
+                    aria-label="Call Nkululeko"
+                    className="grid h-12 w-12 place-items-center rounded-full bg-white/[0.05] ring-1 ring-white/10 transition-all duration-500 ease-spring hover:bg-white/10 active:scale-[0.95]"
+                  >
+                    <PhoneIcon size={18} weight="light" />
+                  </a>
+                </div>
               </div>
+            </Bezel>
+          </Reveal>
+
+          <Reveal className="lg:col-span-4" delay={120} id="objective">
+            <Bezel innerClassName="flex flex-col justify-between gap-10 p-7 md:p-9">
               <div>
-                <p className="eyebrow mb-4">Mr</p>
-                <h1 className="hero-title">Nkululeko<br /><em>Njabulo</em> Ndlwana</h1>
-                <p className="hero-subtitle">Full Stack Developer</p>
+                <Eyebrow icon={SparkleIcon}>01 / Objective</Eyebrow>
+                <p className="mt-8 text-[15px] leading-[1.7] tracking-[-0.005em] text-foreground/80">
+                  I am a Full-Stack Software Engineer dedicated to designing and delivering resilient, high-performance web applications. My core strength lies in bridging the gap between complex backend architectures and intuitive, pixel-perfect user experiences. Whether optimizing database queries for speed, crafting RESTful APIs, or engineering slick frontend interfaces, I prioritize scalable solutions, maintainable code standards, and seamless user interaction. Driven by a product-focused mindset, I transform technical challenges into streamlined digital products that deliver real value to users and business operations
+                </p>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
-                <a className="primary-button" href="mailto:Laxinkulul3ko@gmail.com"><Mail size={16} /> Email me <ArrowUpRight size={15} /></a>
-                <a className="icon-button" href="tel:0678062924" aria-label="Call Nkululeko"><Phone size={17} /></a>
-                <a className="icon-button" href="public/nkululeko_ndlwana.pdf" download="Nkululeko-Ndlwana-CV.pdf" aria-label="Download resume"><Download size={17} /></a>
+              <p className="flex items-center gap-2 text-[13px] text-muted">
+                <MapPinIcon size={16} weight="light" className="text-ice" /> Springs, Johannesburg, South Africa
+              </p>
+            </Bezel>
+          </Reveal>
+        </section>
+
+        {/* ── Project · Toolkit · Assessments ─────────────── */}
+        <section className="grid grid-cols-1 gap-4 py-24 md:gap-5 md:py-32 lg:grid-cols-12">
+          <Reveal className="lg:col-span-7 lg:row-span-2" id="project">
+            <Bezel innerClassName="flex flex-col gap-10 p-7 md:p-10">
+              <div className="flex items-center justify-between gap-4">
+                <Eyebrow icon={BroadcastIcon}>03 / Featured project</Eyebrow>
+                <span className="font-mono text-[11px] text-faint">2025</span>
               </div>
-            </div>
-          </section>
 
-          <section className="bento-card objective-card">
-            <SectionLabel icon={Sparkles}>01 / Objective</SectionLabel>
-            <p className="objective-copy">I am a Full-Stack Software Engineer dedicated to designing and delivering resilient, high-performance web applications. My core strength lies in bridging the gap between complex backend architectures and intuitive, pixel-perfect user experiences. Whether optimizing database queries for speed, crafting RESTful APIs, or engineering slick frontend interfaces, I prioritize scalable solutions, maintainable code standards, and seamless user interaction. Driven by a product-focused mindset, I transform technical challenges into streamlined digital products that deliver real value to users and business operations</p>
-            <div className="card-footer"><MapPin size={15} /> Springs, Johannesburg, South Africa</div>
-          </section>
-
-          <section className="bento-card skills-card">
-            <SectionLabel icon={Code2}>02 / Toolkit</SectionLabel>
-            <div className="space-y-7">
-              <TagGroup label="Languages" items={languages} />
-              <TagGroup label="Frameworks" items={frameworks} />
-              <TagGroup label="Tools" items={tools} />
-            </div>
-            <div className="card-number">02</div>
-          </section>
-
-          <section className="bento-card project-card">
-            <div className="flex items-start justify-between gap-4"><SectionLabel icon={Radio}>03 / Featured project</SectionLabel><span className="project-year">2025</span></div>
-            <div className="tracking-visual"><div className="map-grid" /><div className="route route-a" /><div className="route route-b" /><span className="map-pin pin-one" /><span className="map-pin pin-two" /><span className="map-pin pin-three" /><div className="bus-marker"><Radio size={14} /></div><span className="map-label">BUS 04 · LIVE</span></div>
-            <div>
-              <h2 className="card-title">Bus Tracking<br /><em>Application</em></h2>
-              <p className="card-description">A collaborative student safety tool for live location tracking and smarter day planning.</p>
-              <p className="card-description">At university, students frequently struggled with unpredictable shuttle schedules and waiting at bus stops late in the evening without knowing if the bus was delayed or already gone. This created anxiety and undermined trust in the transport system.</p>
-              <p className="card-description">I collaborated with my team to build an end-to-end digital tracking system that gives students real-time visibility into bus locations and schedules</p>
-              <p className="card-description">I contributed to the full stack—designing the data models for routes and stops, setting up the API layer to ingest GPS telemetry, and crafting an intuitive frontend map interface with live status updates.</p>
-              <p className="card-description">The system successfully demonstrated accurate real-time tracking, eliminated uncertainty around departure times, and significantly improved transit planning and student safety</p>
-            </div>
-            <a className="text-link" href="#project">View case study <ExternalLink size={14} /></a>
-          </section>
-
-          <section className="bento-card assessment-card">
-            <SectionLabel icon={Server}>04 / Assessments</SectionLabel>
-            <h2 className="small-title">Backend systems,<br /><em>built with intent.</em></h2>
-            <p className="card-description">MVC model architecture web applications with security and data storage at the core.</p>
-            <div className="tag-list"><span><Check size={12} /> GlassFish server</span><span><Check size={12} /> Application containers</span><span><Check size={12} /> Security roles</span><span><Check size={12} /> Apache Derby</span></div>
-          </section>
-
-          <section className="bento-card education-card">
-            <SectionLabel icon={GraduationCap}>05 / Education</SectionLabel>
-            <div className="timeline">
-              <div className="timeline-item">
-                <span className="timeline-dot active" />
-                <div>
-                  <div className="timeline-photo"><Image src="/tut.jpg" alt="Tshwane University of Technology" width={400} height={260} /></div>
-                  <p className="timeline-date">2021—2026</p>
-                  <h3><a href="https://www.tut.ac.za/" target="_blank" rel="noreferrer noopener">Tshwane University<br />of Technology</a></h3>
-                  <p>Diploma in Computer Science · NQF 6</p>
+              {/* Live map visual — nested bezel */}
+              <div className="rounded-[1.5rem] bg-white/[0.03] p-1 ring-1 ring-white/[0.06]">
+                <div className="relative h-56 overflow-hidden rounded-[calc(1.5rem-0.25rem)] bg-[radial-gradient(ellipse_at_60%_40%,#0f1c24,#07090b_70%)] md:h-64">
+                  <div className="map-grid" />
+                  <svg className="absolute inset-0 h-full w-full" viewBox="0 0 600 260" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M-10 200 C 120 180, 180 90, 300 120 S 480 60, 610 40" fill="none" stroke="rgba(191,233,255,0.55)" strokeWidth="1" />
+                    <path d="M-10 90 C 140 120, 220 220, 360 190 S 520 150, 610 210" fill="none" stroke="rgba(126,226,184,0.25)" strokeWidth="1" strokeDasharray="3 6" />
+                    {[[150, 151], [300, 120], [470, 72]].map(([x, y]) => (
+                      <circle key={x} cx={x} cy={y} r="4" fill="#0a0b0d" stroke="rgba(191,233,255,0.8)" strokeWidth="1" />
+                    ))}
+                  </svg>
+                  <div className="absolute top-1/2 left-1/2 -mt-5 -ml-5">
+                    <div className="bus-travel">
+                      <div className="bus-ping relative grid h-10 w-10 place-items-center rounded-full bg-ice text-background shadow-[0_0_30px_rgba(191,233,255,0.45)]">
+                        <BusIcon size={18} weight="light" />
+                      </div>
+                    </div>
+                  </div>
+                  <span className="absolute bottom-3 left-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ice/70">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald" /> Bus 04 · Live
+                  </span>
                 </div>
               </div>
-              <div className="timeline-item">
-                <span className="timeline-dot" />
-                <div>
-                  <div className="timeline-photo"><Image src="/springsbhs.jpg" alt="Springs Boys High School" width={400} height={260} /></div>
-                  <p className="timeline-date">2017—2021</p>
-                  <h3><a href="https://www.sbhs.co.za/" target="_blank" rel="noreferrer noopener">Springs Boys<br />High School</a></h3>
-                  <p>National Senior Certificate</p>
+
+              <div>
+                <h2 className="text-4xl font-medium leading-[0.95] tracking-[-0.045em] md:text-5xl">
+                  Bus Tracking
+                  <br />
+                  <span className="font-serif font-normal italic tracking-[-0.01em] text-ice">Application</span>
+                </h2>
+                <div className="mt-7 space-y-4 text-[14px] leading-[1.7] text-muted">
+                  <p className="text-foreground/85">A collaborative student safety tool for live location tracking and smarter day planning.</p>
+                  <p>At university, students frequently struggled with unpredictable shuttle schedules and waiting at bus stops late in the evening without knowing if the bus was delayed or already gone. This created anxiety and undermined trust in the transport system.</p>
+                  <p>I collaborated with my team to build an end-to-end digital tracking system that gives students real-time visibility into bus locations and schedules</p>
+                  <p>I contributed to the full stack—designing the data models for routes and stops, setting up the API layer to ingest GPS telemetry, and crafting an intuitive frontend map interface with live status updates.</p>
+                  <p>The system successfully demonstrated accurate real-time tracking, eliminated uncertainty around departure times, and significantly improved transit planning and student safety</p>
                 </div>
               </div>
-            </div>
-          </section>
 
-          <section className="bento-card references-card">
-            <SectionLabel icon={BriefcaseBusiness}>06 / References</SectionLabel>
-            <div className="reference-list">
-              <div className="reference">
-                <div className="reference-initial">VM</div>
-                <div><h3>Vuyisile Memani</h3><p>Lecturer · TUT</p><a href="mailto:MemaniV@tut.ac.za">MemaniV@tut.ac.za</a></div>
-                <span>01</span>
+              <div className="mt-auto flex flex-wrap gap-3">
+                {repos.map((repo) => (
+                  <GhostButton key={repo.href} href={repo.href} icon={GithubLogoIcon} external>
+                    {repo.label}
+                  </GhostButton>
+                ))}
               </div>
-              <div className="reference">
-                <div className="reference-initial">ML</div>
-                <div><h3>Marlo Liebenberg</h3><p>Lecturer · TUT</p><a href="mailto:liebenbergm@tut.ac.za">liebenbergm@tut.ac.za</a></div>
-                <span>02</span>
+            </Bezel>
+          </Reveal>
+
+          <Reveal className="lg:col-span-5" delay={120} id="toolkit">
+            <Bezel innerClassName="p-7 md:p-9">
+              <Eyebrow icon={CodeIcon}>02 / Toolkit</Eyebrow>
+              <div className="mt-8 space-y-7">
+                <TagGroup label="Languages" items={languages} />
+                <TagGroup label="Frameworks" items={frameworks} />
+                <TagGroup label="Databases" items={databases} />
+                <TagGroup label="Tools" items={tools} />
               </div>
-                <div className="reference">
-                  <div className="reference-initial">RMN</div>
-                  <div><h3>Revaldo Mphaphuli Ndivho</h3><p>Mentor · TUT</p><a href="mailto:revaldondivho@gmail.com">revaldondivho@gmail.com</a></div>
-                  <span>03</span>
+            </Bezel>
+          </Reveal>
+
+          <Reveal className="lg:col-span-5" delay={200}>
+            <Bezel innerClassName="p-7 md:p-9">
+              <Eyebrow icon={HardDrivesIcon}>04 / Assessments</Eyebrow>
+              <h2 className="mt-8 text-3xl font-medium leading-[1] tracking-[-0.04em] md:text-4xl">
+                Backend systems,
+                <br />
+                <span className="font-serif font-normal italic tracking-[-0.01em] text-ice">built with intent.</span>
+              </h2>
+              <p className="mt-5 text-[14px] leading-[1.7] text-muted">MVC model architecture web applications with security and data storage at the core.</p>
+              <ul className="mt-7 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {["GlassFish server", "Application containers", "Security roles", "Apache Derby"].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-[13px] text-foreground/80">
+                    <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald/10 text-emerald">
+                      <CheckIcon size={11} weight="light" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Bezel>
+          </Reveal>
+        </section>
+
+        {/* ── Education · Experience ──────────────────────── */}
+        <section className="grid grid-cols-1 gap-4 py-24 md:gap-5 md:py-32 lg:grid-cols-12">
+          <Reveal className="lg:col-span-5" id="education">
+            <Bezel innerClassName="p-7 md:p-9">
+              <Eyebrow icon={GraduationCapIcon}>05 / Education</Eyebrow>
+              <ol className="relative mt-8 space-y-10 before:absolute before:top-2 before:bottom-4 before:left-[5px] before:w-px before:bg-gradient-to-b before:from-ice/60 before:to-transparent">
+                {education.map((school) => (
+                  <li key={school.href} className="relative flex gap-6">
+                    <span
+                      className={`relative z-10 mt-1.5 h-[11px] w-[11px] flex-none rounded-full ring-1 ${school.active ? "bg-ice ring-ice shadow-[0_0_0_5px_rgba(191,233,255,0.1)]" : "bg-[#0a0b0d] ring-white/30"}`}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-5 rounded-[1.25rem] bg-white/[0.03] p-1 ring-1 ring-white/[0.06]">
+                        <div className="relative aspect-[16/10] overflow-hidden rounded-[calc(1.25rem-0.25rem)]">
+                          <Image src={school.image} alt={school.alt} fill sizes="(min-width: 1024px) 400px, 90vw" className="object-cover saturate-[0.8]" />
+                        </div>
+                      </div>
+                      <p className="font-mono text-[11px] text-ice">{school.date}</p>
+                      <h3 className="mt-2 text-xl font-medium leading-[1.15] tracking-[-0.03em]">
+                        <a
+                          href={school.href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="underline decoration-white/20 underline-offset-4 transition-colors duration-500 ease-spring hover:text-ice hover:decoration-ice"
+                        >
+                          {school.name[0]}
+                          <br />
+                          {school.name[1]}
+                        </a>
+                      </h3>
+                      <p className="mt-2 text-[13px] text-muted">{school.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </Bezel>
+          </Reveal>
+
+          <Reveal className="lg:col-span-7" delay={120} id="experience">
+            <Bezel innerClassName="flex flex-col gap-10 p-7 md:p-9">
+              <div>
+                <Eyebrow icon={BriefcaseIcon}>06 / Experience</Eyebrow>
+              </div>
+              {experience.map((job) => (
+                <article key={job.org} className="flex flex-1 flex-col gap-8">
+                  <div>
+                    <span className="inline-flex items-center gap-2 font-mono text-[11px] text-ice">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_0_3px_rgba(126,226,184,0.15)]" />
+                      {job.date}
+                    </span>
+                    <h2 className="mt-4 text-4xl font-medium leading-[0.95] tracking-[-0.045em] md:text-5xl">{job.org}</h2>
+                    <p className="mt-3 font-serif text-2xl italic text-ice md:text-3xl">{job.role}</p>
+                  </div>
+                  <ul className="space-y-3">
+                    {job.points.map((point) => (
+                      <li key={point} className="rounded-[1.5rem] bg-white/[0.025] p-1 ring-1 ring-white/[0.05]">
+                        <div className="flex gap-4 rounded-[calc(1.5rem-0.25rem)] bg-[#0d0e11] p-5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] md:p-6">
+                          <span className="mt-0.5 grid h-5 w-5 flex-none place-items-center rounded-full bg-emerald/10 text-emerald">
+                            <CheckIcon size={11} weight="light" />
+                          </span>
+                          <p className="text-[14px] leading-[1.7] text-foreground/80">{point}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </Bezel>
+          </Reveal>
+        </section>
+
+        {/* ── References ──────────────────────────────────── */}
+        <section className="py-24 md:py-32">
+          <Reveal id="references">
+            <Bezel innerClassName="p-7 md:p-9">
+              <Eyebrow icon={UsersThreeIcon}>07 / References</Eyebrow>
+              <ul className="mt-8 grid grid-cols-1 gap-3 lg:grid-cols-3">
+                {references.map((ref, i) => (
+                  <li key={ref.email} className="rounded-[1.5rem] bg-white/[0.025] p-1 ring-1 ring-white/[0.05]">
+                    <div className="flex items-center gap-4 rounded-[calc(1.5rem-0.25rem)] bg-[#0d0e11] p-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] md:gap-5 md:p-5">
+                      <span className="grid h-12 w-12 flex-none place-items-center rounded-full bg-ice/[0.08] font-mono text-[11px] text-ice ring-1 ring-ice/15">
+                        {ref.initials}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-[15px] font-medium tracking-[-0.01em]">{ref.name}</h3>
+                        <p className="mt-0.5 text-[12px] text-muted">{ref.role}</p>
+                        <a
+                          href={`mailto:${ref.email}`}
+                          className="mt-1.5 block truncate text-[13px] text-ice/90 transition-colors duration-500 ease-spring hover:text-foreground"
+                        >
+                          {ref.email}
+                        </a>
+                      </div>
+                      <span className="hidden font-mono text-[11px] text-faint sm:block">{String(i + 1).padStart(2, "0")}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Bezel>
+          </Reveal>
+        </section>
+
+        {/* ── Contact ─────────────────────────────────────── */}
+        <section id="contact" className="py-24 md:py-32">
+          <Reveal>
+            <Bezel innerClassName="px-7 py-16 md:px-16 md:py-24">
+              <div className="pointer-events-none absolute -top-40 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(191,233,255,0.14),transparent_65%)]" />
+              <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
+                <div className="lg:col-span-8">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/[0.04] px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-muted ring-1 ring-white/10">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_0_3px_rgba(126,226,184,0.15)]" />
+                    Open to opportunity
+                  </span>
+                  <h2 className="mt-8 text-[clamp(2.75rem,8vw,6rem)] font-medium leading-[0.9] tracking-[-0.055em]">
+                    Let&apos;s make
+                    <br />
+                    <span className="font-serif font-normal italic tracking-[-0.02em] text-ice">something useful.</span>
+                  </h2>
                 </div>
-            </div>
-          </section>
-
-          <section id="resume" className="bento-card contact-card"><div><SectionLabel icon={Wrench}>Open to opportunity</SectionLabel><h2 className="small-title">Let&apos;s make<br /><em>something useful.</em></h2></div><div className="contact-bottom"><p><Mail size={15} /> Laxinkulul3ko@gmail.com</p><p><Phone size={15} /> 067 806 2924</p><a className="contact-arrow" href="mailto:Laxinkulul3ko@gmail.com" aria-label="Contact Nkululeko"><ArrowUpRight size={22} /></a></div></section>
-        </div>
-        <footer className="mt-8 flex justify-between text-xs uppercase tracking-[0.18em] text-slate-500"><span>© 2026 Nkululeko Ndlwana</span><span><GitBranch size={14} className="inline" /> &nbsp;Johannesburg, ZA</span></footer>
+                <div className="flex flex-col gap-6 lg:col-span-4">
+                  <div className="space-y-3 text-[14px] text-foreground/80">
+                    <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 transition-colors duration-500 ease-spring hover:text-ice">
+                      <EnvelopeSimpleIcon size={18} weight="light" className="text-ice" /> {EMAIL}
+                    </a>
+                    <a href={PHONE_HREF} className="flex items-center gap-3 transition-colors duration-500 ease-spring hover:text-ice">
+                      <PhoneIcon size={18} weight="light" className="text-ice" /> {PHONE_LABEL}
+                    </a>
+                    <a
+                      href={GITHUB_HREF}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="flex items-center gap-3 transition-colors duration-500 ease-spring hover:text-ice"
+                    >
+                      <GithubLogoIcon size={18} weight="light" className="text-ice" /> {GITHUB_LABEL}
+                    </a>
+                  </div>
+                  <div>
+                    <PrimaryButton href={`mailto:${EMAIL}`}>Email me</PrimaryButton>
+                  </div>
+                </div>
+              </div>
+            </Bezel>
+          </Reveal>
+        </section>
       </main>
+
+      <footer className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col gap-3 px-4 pb-10 font-mono text-[11px] uppercase tracking-[0.18em] text-faint sm:flex-row sm:justify-between md:px-8">
+        <span>© 2026 Nkululeko Ndlwana</span>
+        <span className="inline-flex items-center gap-2">
+          <GitBranchIcon size={13} weight="light" /> Johannesburg, ZA
+        </span>
+      </footer>
     </div>
   );
 }
