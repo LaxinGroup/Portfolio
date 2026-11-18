@@ -45,7 +45,7 @@ import {
 const EMAIL = "Laxinkulul3ko@gmail.com";
 const PHONE_HREF = "tel:0678062924";
 const PHONE_LABEL = "067 806 2924";
-const CV_HREF = "/latest_cv.pdf";
+const CV_HREF = "/Nkululeko_Ndlwana_cv.pdf";
 const GITHUB_HREF = "https://github.com/LaxinGroup";
 const GITHUB_LABEL = "github.com/LaxinGroup";
 
@@ -247,7 +247,7 @@ export default function Home() {
 
                 <div className="flex flex-wrap items-center gap-3">
                   <PrimaryButton href={`mailto:${EMAIL}`}>Email me</PrimaryButton>
-                  <GhostButton href={CV_HREF} download="Nkululeko-Ndlwana-CV.pdf" icon={DownloadSimpleIcon}>
+                  <GhostButton href={CV_HREF} download="Nkululeko_Ndlwana_cv.pdf" icon={DownloadSimpleIcon}>
                     Download CV
                   </GhostButton>
                   <a
