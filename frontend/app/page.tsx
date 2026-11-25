@@ -106,6 +106,7 @@ const projects: Project[] = [
       "Booking platform for a solo cleaning business. Customers choose services with live prices and one of three daily time windows. Each confirmed booking is saved to Neon PostgreSQL and synced to Google Calendar, with a cap of three bookings per day.",
     tech: ["Next.js", "Express.js", "TypeScript", "Neon PostgreSQL", "Google Calendar API"],
     repo: "https://github.com/LaxinGroup/MphoCleaningService",
+    live: "https://client-sayh.vercel.app",
   },
   {
     title: "AgriAdvisorAI",
