@@ -83,6 +83,39 @@ const repos = [
   { label: "Backend repo", href: "https://github.com/Gorillmac/smartbus-backend" },
 ];
 
+type Project = {
+  title: string;
+  description: string;
+  tech: string[];
+  repo: string;
+  live?: string;
+};
+
+const projects: Project[] = [
+  {
+    title: "Blood Donation Drive Coordinator",
+    description:
+      "Full-stack platform that replaces paper sign-up sheets for campus blood donation drives. Donors pass an eligibility pre-screen and book 30-minute slots, medical staff run a live check-in queue, and organisers track turnout analytics with CSV and PDF reports.",
+    tech: ["Next.js", "Express.js", "PostgreSQL", "Neon Auth"],
+    repo: "https://github.com/LaxinGroup/CS-Blood-Donation-Drive-Coordinator-",
+    live: "https://my-app-tau-five-91.vercel.app",
+  },
+  {
+    title: "Mupho the Cleaner",
+    description:
+      "Booking platform for a solo cleaning business. Customers choose services with live prices and one of three daily time windows. Each confirmed booking is saved to Neon PostgreSQL and synced to Google Calendar, with a cap of three bookings per day.",
+    tech: ["Next.js", "Express.js", "TypeScript", "Neon PostgreSQL", "Google Calendar API"],
+    repo: "https://github.com/LaxinGroup/MphoCleaningService",
+  },
+  {
+    title: "AgriAdvisorAI",
+    description:
+      "Multilingual workplace support assistant for IT and benefits questions. It answers only from an approved knowledge base with cited sources, never decides eligibility, and hands uncertain questions to a human specialist with context.",
+    tech: ["Expo", "React Native", "Express.js", "PostgreSQL", "Gemini API"],
+    repo: "https://github.com/LaxinGroup/AgriAdvisorAI",
+  },
+];
+
 const education = [
   {
     image: "/tut.jpg",
@@ -331,6 +364,37 @@ export default function Home() {
                     {repo.label}
                   </GhostButton>
                 ))}
+              </div>
+
+              <div className="border-t border-white/[0.06] pt-8">
+                <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-faint">More projects</p>
+                <ul className="space-y-3">
+                  {projects.map((project) => (
+                    <li key={project.repo} className="rounded-[1.5rem] bg-white/[0.025] p-1 ring-1 ring-white/[0.05]">
+                      <div className="flex flex-col gap-4 rounded-[calc(1.5rem-0.25rem)] bg-[#0d0e11] p-5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] md:p-6">
+                        <h3 className="text-xl font-medium leading-[1.15] tracking-[-0.03em]">{project.title}</h3>
+                        <p className="text-[14px] leading-[1.7] text-muted">{project.description}</p>
+                        <ul className="flex flex-wrap gap-2">
+                          {project.tech.map((tech) => (
+                            <li key={tech} className="rounded-full bg-white/[0.04] px-3 py-1 font-mono text-[11px] text-foreground/75 ring-1 ring-white/[0.08]">
+                              {tech}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex flex-wrap gap-3">
+                          <GhostButton href={project.repo} icon={GithubLogoIcon} external>
+                            GitHub repo
+                          </GhostButton>
+                          {project.live && (
+                            <GhostButton href={project.live} icon={ArrowUpRightIcon} external>
+                              Live site
+                            </GhostButton>
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Bezel>
           </Reveal>
